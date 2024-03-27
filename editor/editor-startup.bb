@@ -2138,9 +2138,6 @@ ScaleMesh ObjectPositionMarkerMesh,0.08,90,0.08
 ;EntityColor ObjectPositionMarkerMesh,100,255,100
 HideEntity ObjectPositionMarkerMesh
 
-Include "shared/global-graphics-define.bb"
-Include "shared/global-graphics.bb"
-
 PopulateGlobalGraphics(0)
 
 Global hubmode

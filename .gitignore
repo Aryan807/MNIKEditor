@@ -1,4 +1,6 @@
 *.bb_bak1
 *.bb_bak2
+*.cfg
 Data/
 UserData/
+.vscode/

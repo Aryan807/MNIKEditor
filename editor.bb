@@ -7953,14 +7953,6 @@ Function ShowObjectModel(Obj.GameObject)
 
 End Function
 
-; Q - NPC player functionality
-Function IsModelNPC(mdlname$)
-
-	if mdlname$="!NPC" Or mdlname$="!PlayerNPC" Return True
-	Return False
-
-End Function
-
 Function IDFilterShouldHide(Attributes.GameObjectAttributes)
 
 If IDFilterEnabled
@@ -15210,66 +15202,6 @@ Function MyProcessFileNameTexture$(ex$)
 
 End Function
 
-Function MyLoadTexture(ex$,flag)
-
-;	MyWriteString(debugfile,"Tex: "+ex$)
-
-	exbackup$=ex$
-
-	ex2$=MyProcessFileNameTexture$(ex$)
-
-	;Print ex2$
-	a=LoadTexture(ex2$,flag)
-	If a=0
-
-		a=LoadTexture(exbackup$,flag)
-		If a=0
-			jj=0
-			Repeat
-				jj=jj+1
-			Until FileType(globaldirname$+"\temp\debug."+Str$(jj))=0
-
-			debugfile=WriteFile (globaldirname$+"\temp\debug."+Str$(jj))
-			Print "Couldn't Load Texture:"+ex$
-			Delay 5000
-			WriteString debugfile,ex$
-			WriteString debugfile,ex2$
-			If FileType(ex2$)=1
-				WriteString debugfile,"File Exists!"
-			Else
-				WriteString debugfile,"File Doesn't Exist!"
-				If ex$="load.jpg"
-					Print ""
-					Print "Please ensure that you install any updates INTO"
-					Print "your existing Wonderland Adventures directory"
-					Print "(i.e. overwriting some of the existing files)."
-					Print ""
-					Print "Do not simply run the .exe file from within the"
-					Print "update files, or you will receive this error."
-					Print "Unzip the files into your Wonderland directory first."
-
-					Delay 1000
-					Print ""
-					Print "Exiting... Press Any Key."
-					WaitKey()
-
-					End
-				EndIf
-			EndIf
-			WriteInt debugfile,TotalVidMem()
-			WriteInt debugfile,AvailVidMem()
-			Print "Trying Again"
-			a=LoadTexture(ex2$,flag)
-			If a=0
-				Print "Nope."
-				Delay 5000
-				End
-			EndIf
-		EndIf
-	EndIf
-	Return a
-End Function
-
 Function MyProcessFileNameModel$(ex$)
 
 	j=Len(ex$)
@@ -15301,165 +15233,6 @@ Function MyProcessFileNameModel$(ex$)
 
 	Return ex2$
 
-End Function
-
-Function MyLoadMesh(ex$,parent=0)
-;	MyWriteString(debugfile,"Mesh: "+ex$)
-
-	ex2$=MyProcessFileNameModel$(ex$)
-
-	;Print ex2$
-
-;	Print ex2$
-
-	CopyFile ex2$,globaldirname$+"\temp\debug."+Right$(ex$,3)
-
-	;Print ex2$
-	If parent>0
-		a=LoadMesh(globaldirname$+"\temp\debug."+Right$(ex$,3),parent)
-	Else
-		a=LoadMesh(globaldirname$+"\temp\debug."+Right$(ex$,3))
-	EndIf
-	DeleteFile globaldirname$+"\temp\debug."+Right$(ex$,3)
-
-	If a=0
-		jj=0
-		Repeat
-			jj=jj+1
-		Until FileType(globaldirname$+"\temp\debug."+Str$(jj))=0
-
-		debugfile=WriteFile (globaldirname$+"\temp\debug."+Str$(jj))
-		ShowMessage("Couldn't Load Mesh:"+ex$,5000)
-		WriteString debugfile,ex$
-		WriteString debugfile,ex2$
-
-		WriteInt debugfile,TotalVidMem()
-		WriteInt debugfile,AvailVidMem()
-		End
-	EndIf
-	Return a
-End Function
-
-Function MyLoadAnimMesh(ex$,parent=0)
-;	MyWriteString(debugfile,"AnimMesh: "+ex$)
-
-	ex4$=ex$
-
-	j=Len(ex$)
-	Repeat
-		j=j-1
-	Until Mid$(ex$,j,1)="/" Or Mid$(ex$,j,1)="\" Or j=1
-
-	If j=1
-		ex2$=""
-		j=0
-	Else
-		ex2$=Left$(ex$,j)
-	EndIf
-
-	j2=j
-
-	Repeat
-		j=j+1
-		b=Asc(Mid$(Lower$(ex$),j,1))
-		If b>=97 And b<=122
-			b=b+1
-			If b=123 Then b=97
-		EndIf
-		ex2$=ex2$+Chr$(b)
-	Until Mid$(ex$,j,1)="."
-	If Lower$(Right$(ex$,3))="3ds"
-		ex2$=ex2$+"wd3"
-	Else
-		ex2$=ex2$+"wd1"
-	EndIf
-
-;	Print ex2$
-;	Print ex$
-	If j2>0
-		ex$=Right$(ex$,Len(ex$)-j2)
-	EndIf
-
-;	Print ex$
-
-	ex$=GlobalDirName$+"\Temp\"+ex$
-
-	CopyFile ex2$,ex$
-
-	;Print ex2$
-	If parent>0
-		a=LoadAnimMesh(ex$,parent)
-	Else
-		a=LoadAnimMesh(ex$)
-	EndIf
-	DeleteFile ex$
-	If a=0
-		jj=0
-		Repeat
-			jj=jj+1
-		Until FileType("debug."+Str$(jj))=0
-
-		debugfile=WriteFile ("debug."+Str$(jj))
-		Print "Couldn't Load AnimMesh:"+ex$
-		Delay 5000
-		WriteString debugfile,ex$
-		WriteString debugfile,ex2$
-
-		WriteInt debugfile,TotalVidMem()
-		WriteInt debugfile,AvailVidMem()
-		End
-	EndIf
-
-	Return a
-End Function
-
-Function MyLoadMD2(ex$)
-;	MyWriteString(debugfile,"MD2: "+ex$)
-
-	j=Len(ex$)
-	Repeat
-		j=j-1
-	Until Mid$(ex$,j,1)="/" Or Mid$(ex$,j,1)="\" Or j=1
-
-	If j=1
-		ex2$=""
-		j=0
-	Else
-		ex2$=Left$(ex$,j)
-	EndIf
-
-	Repeat
-		j=j+1
-		b=Asc(Mid$(Lower$(ex$),j,1))
-		If b>=97 And b<=122
-			b=b+1
-			If b=123 Then b=97
-		EndIf
-		ex2$=ex2$+Chr$(b)
-	Until Mid$(ex$,j,1)="."
-	ex2$=ex2$+"wd2"
-
-	;Print ex2$
-	a=LoadMD2(ex2$,parent)
-
-	If a=0
-		jj=0
-		Repeat
-			jj=jj+1
-		Until FileType(globaldirname$+"\temp\debug."+Str$(jj))=0
-
-		debugfile=WriteFile (globaldirname$+"\temp\debug."+Str$(jj))
-		Print "Couldn't Load MD2:"+ex$
-		Delay 5000
-		WriteString debugfile,ex$
-		WriteString debugfile,ex2$
-
-		WriteInt debugfile,TotalVidMem()
-		WriteInt debugfile,AvailVidMem()
-		End
-	EndIf
-
-	Return a
 End Function
 
 Function MyLoadSound(ex$)
@@ -15508,36 +15281,6 @@ Function MyLoadSound(ex$)
 	EndIf
 
 	Return a
-End Function
-
-Function myFileType(ex$)
-	j=Len(ex$)
-
-	If j<>1
-		Repeat
-			j=j-1
-		Until Mid$(ex$,j,1)="/" Or Mid$(ex$,j,1)="\" Or j=1
-	EndIf
-
-	If j=1
-		ex2$=""
-		j=0
-	Else
-		ex2$=Left$(ex$,j)
-	EndIf
-
-	Repeat
-		j=j+1
-		b=Asc(Mid$(Lower$(ex$),j,1))
-		If b>=97 And b<=122
-			b=b+1
-			If b=123 Then b=97
-		EndIf
-		ex2$=ex2$+Chr$(b)
-	Until Mid$(ex$,j,1)="." Or j>=4096
-	ex2$=ex2$+"wdf"
-	Return FileType(ex2$)
-
 End Function
 
 Function DisplayText2(mytext$,x#,y#,red,green,blue,widthmult#=1.0)
@@ -16833,15 +16576,6 @@ Function CompileHub(PackContent)
 	Repeat
 	Until LeftMouseDown()=False
 	Return True
-End Function
-
-Function GetFileNameFromPath$(path$)
-	; fetches the exact file name from path and removes the rest of the path
-	For i=Len(path$) To 1 Step -1
-		If Mid$(path$,i,1)=Chr$(47) Or Mid$(path$,i,1)=Chr$(47)
-			Return Right$(path,Len(path$)-i)
-		EndIf
-	Next
 End Function
 
 Function CompileAdventure(PackCustomContent)

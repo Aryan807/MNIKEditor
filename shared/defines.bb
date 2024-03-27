@@ -8,6 +8,6 @@ Global MagicLimitMin = 0
 Global MagicLimitMax = 9
 
 ; INCLUDES
-;Include "shared/objects-woi-type-define.bb"
+Include "shared/objects-woi-type-define.bb"
 Include "shared/particles-define.bb"
 Include "shared/global-graphics-define.bb"

@@ -810,9 +810,6 @@ Until NofTilePresetTiles>0
 ; OBJECTS
 ; ------------------------
 
-Global NofObjects=0
-Const MaxNofObjects=1000
-
 Global NofObjectsInstantiated=0
 
 Dim ObjectAdjusterString$(MaxNofObjects,30)

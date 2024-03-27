@@ -2,7 +2,7 @@
 ; ========================
 
 Include "shared/content.bb"
-;Include "shared/objects-woi-type.bb"
+Include "shared/objects-woi-type.bb"
 Include "shared/particles.bb"
 Include "shared/global-graphics.bb"
 ;Include "shared/mesh-control.bb"

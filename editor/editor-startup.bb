@@ -12,10 +12,7 @@ Else
 	VersionText$=LSet$("Wonderland Adventures Editor",43-Len(GameVersion$))+"v"+GameVersion$
 EndIf
 
-Include "shared/particles-define.bb"
-Include "sound-define.bb"
-
-Global VersionText$="WA Editor       MNIKSource v10.04 ("+VersionDate$+")"
+VersionText$="WA Editor       MNIKSource v10.04 ("+VersionDate$+")" ; set this for now
 
 Global MASTERUSER=True
 

@@ -2,7 +2,7 @@
 ; ====================
 
 ; SHARED DEFINATIONS
-Const GameVersion$="10.6.0"
+Const GameVersion$="MNIK Source 10.6.0"
 ; magic stuff
 Global MagicLimitMin = 0
 Global MagicLimitMax = 9

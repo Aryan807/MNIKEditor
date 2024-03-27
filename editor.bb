@@ -28,13 +28,15 @@ Dim CompleteCustomHubOverideData$(0) ;required because of shared source with pla
 
 ; App title and includes
 Global VersionDate$="07/16/23"
-
 AppTitle "Wonderland Adventures MNIKEditor (Version "+VersionDate$+")"
 
-
+; GLOBAL DEFINATIONS
+Include "shared/defines.bb"
+;Include "editor/editor-cutscene-define.bb"
 Include "shared/particles-define.bb"
 Include "sound-define.bb"
 
+; STARTUP
 Include "editor/editor-startup.bb"
 
 LoadSounds()
@@ -29615,6 +29617,6 @@ Function ControlObjects()
 
 End Function
 
-Include "particles.bb"
+Include "shared/particles.bb"
 Include "sound.bb"
 Include "customcontent.bb"

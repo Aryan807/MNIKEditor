@@ -3,7 +3,7 @@
 AppTitle "Wonderland Adventures Editor"
 ; Global Definitions
 
-Include "particles-define.bb"
+Include "shared/particles-define.bb"
 Include "level-define.bb"
 Include "menu-define.bb"
 Include "adventures-define.bb"
@@ -2341,7 +2341,7 @@ Data "THIS VERSION HAS EXPIRED.","PLEASE CONTACT WWW.MIDNIGHTSYNERGY.COM","FOR M
 Data "CANNOT RUN BETA ON THIS COMPUTER.","PLEASE CONTACT WWW.MIDNIGHTSYNERGY.COM","FOR MORE INFORMATION."
 
 
-Include "particles.bb"
+Include "shared/particles.bb"
 Include "level.bb"
 Include "adventures.bb"
 Include "menu.bb"

@@ -1810,7 +1810,7 @@ Function SelectSpell(i,InvenIcon)
 	EndIf
 
 	If CurrentSpell<>i And CurrentSpell>0
-		Restore .SpellData
+		Restore SpellData
 		For j=1 To CurrentSpell
 			Read a$
 			Read b$

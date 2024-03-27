@@ -1453,44 +1453,6 @@ Function ControlFireFlower(i)
 
 End Function
 
-; col is data0 and direction is data2
-Function RedoSuctubeMesh(Entity, col, objactive, direction, yawadjust)
-
-	Surface=GetSurface(Entity,1)
-	If objactive Mod 2 = 1
-		active=0
-	Else
-		active=1
-	EndIf
-	If yawadjust=(-90*direction +3600) Mod 360
-		; in original position
-		dir=0
-	Else
-		; switched from original
-		dir=1
-	EndIf
-
-	; point arrow
-	If dir=0
-		VertexCoords surface,0,-0.3,1.71,-0.3
-		VertexCoords surface,1,+0.3,1.71,-0.3
-		VertexCoords surface,2,0,1.71,+0.3
-	Else
-		VertexCoords surface,0,-0.3,1.71,+0.3
-		VertexCoords surface,2,+0.3,1.71,+0.3
-		VertexCoords surface,1,0,1.71,-0.3
-	EndIf
-
-	; and give colour
-
-	VertexTexCoords surface,0,(col Mod 8)*0.125+.01,(col/8)*0.125+.51+.25*active
-	VertexTexCoords surface,1,(col Mod 8)*0.125+.115,(col/8)*0.125+.51+.25*active
-	VertexTexCoords surface,2,(col Mod 8)*0.125+.051,(col/8)*0.125+.51+.115+.25*active
-
-	UpdateNormals Entity
-
-End Function
-
 Function ToggleObject(i)
 	Obj.GameObject=LevelObjects(i)
 	Attributes.GameObjectAttributes=Obj\Attributes
@@ -1514,7 +1476,7 @@ Function ToggleObject(i)
 		If SimulatedObjectActive(i)<0 Then SimulatedObjectActive(i)=0
 	EndIf
 	If Attributes\LogicType=281 And Attributes\ModelName$="!SucTube"
-		Redosuctubemesh(Obj\Model\Entity, SimulatedObjectData(i,0), SimulatedObjectActive(i), SimulatedObjectData(i,2), SimulatedObjectYawAdjust(i))
+		Redosuctubemesh2(Obj\Model\Entity, SimulatedObjectData(i,0), SimulatedObjectActive(i), SimulatedObjectData(i,2), SimulatedObjectYawAdjust(i))
 	EndIf
 
 End Function

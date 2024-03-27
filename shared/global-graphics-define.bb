@@ -15,8 +15,8 @@ Dim KeyCardTexture(1)
 ; IconTexture
 Global IconTextureCustom=0
 ; Teleporters ; REVISIT! Change to Global (stars) and apply it over
-Global NewTeleporterTexture; org=16
-Dim TeleporterTexture(16)
+Global TeleporterTexture; org=16
+Dim OldTeleporterTexture(16)
 Global TransporterTexture
 Global StepStoneTexture
 ; FireTrap
@@ -50,7 +50,7 @@ Global SkyMachineMapTexture
 ; ----------------
 ; Stinkers
 Global StinkerMesh
-Global StinkerTexture
+Dim StinkerTexture(8,5) ; org=100x10
 Global StinkerSmokedTexture
 
 ; Wee Stinkers

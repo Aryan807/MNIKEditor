@@ -7,9 +7,9 @@ Function PopulateGlobalGraphics(mode) ; 0 = editor, 1 = player
 	KeyCardTexture(1)=MyLoadTexture("Data/NewGraphics/keycardtop.png",1+4)
 
 	; Teleport
-	NewTeleporterTexture=MyLoadTexture("Data/NewModels/Teleport/teleport.png",1)
+	TeleporterTexture=MyLoadTexture("Data/NewModels/Teleport/teleport.png",1)
 	For i=0 To 8
-		TeleporterTexture(i)=myLoadTexture("data/models/teleport/teleport"+Str$(i)+".jpg",1)
+		OldTeleporterTexture(i)=myLoadTexture("data/models/teleport/teleport"+Str$(i)+".jpg",1)
 	Next
 	; TextureBlend TeleporterTexture,3
 	; TextureCoords TeleporterTexture,1 ; !!! Yields GPU-dependent results !!!
@@ -80,7 +80,7 @@ Function PopulateGlobalGraphics(mode) ; 0 = editor, 1 = player
 	;For expr=0 To 5
 	;	StinkerTexture(8,expr)=MyLoadTexture("Data/NewModels/stinker/body00"+Str$(8+1)+Chr$(65+expr)+".jpg",1)
 	;Next
-	StinkerTexture=MyLoadTexture("data\models\stinker\body001a.jpg",1)
+	EditorStinkerTexture=MyLoadTexture("data\models\stinker\body001a.jpg",1)
 	StinkerSmokedTexture=MyLoadTexture("Data/Models/stinker/bodysmoked.jpg",1)
 	If mode=0
 		;EntityTexture GetChild(StinkerMesh,3),StinkerTexture

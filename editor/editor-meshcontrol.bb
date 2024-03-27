@@ -1,6 +1,6 @@
 ; TEMPORARY FILE TO STORE MESH CONTROLLERS
 
-Function CreateSpellBallMesh(subtype)
+Function CreateSpellBallMesh2(subtype)
 
 	entity=CreateSphere(4)
 	UseMagicColor(Entity,subtype)
@@ -11,7 +11,7 @@ Function CreateSpellBallMesh(subtype)
 
 End Function
 
-Function CreateIceBlockMesh(btype)
+Function CreateIceBlockMesh2(btype)
 
 	; type- 0-ice, 1-floing
 
@@ -38,7 +38,7 @@ Function CreateIceBlockMesh(btype)
 	Return Entity
 End Function
 
-Function CreateIceFloatMesh()
+Function CreateIceFloatMesh2()
 	Entity=CreateCylinder(16,True)
 	;For i=1 To CountVertices (GetSurface(entity,1))-1
 	;	VertexCoords GetSurface(entity,1),i,VertexX(GetSurface(entity,1),i)+Rnd(-.1,.1),VertexY(GetSurface(entity,1),i),VertexZ(GetSurface(entity,1),i)+Rnd(-.1,.1)
@@ -51,7 +51,7 @@ Function CreateIceFloatMesh()
 	Return Entity
 End Function
 
-Function CreatePlantFloatMesh()
+Function CreatePlantFloatMesh2()
 	Entity=CreateCylinder(9,True)
 	;For i=1 To CountVertices (GetSurface(entity,1))-1
 	;	VertexCoords GetSurface(entity,1),i,VertexX(GetSurface(entity,1),i)+Rnd(-.1,.1),VertexY(GetSurface(entity,1),i),VertexZ(GetSurface(entity,1),i)+Rnd(-.1,.1)
@@ -66,7 +66,7 @@ End Function
 
 
 
-Function CreateFlipBridgeMesh(tex)
+Function CreateFlipBridgeMesh2(tex)
 
 	subtype=3
 
@@ -162,7 +162,7 @@ Function CreateFlipBridgeMesh(tex)
 
 End Function
 
-Function CreateVoidMesh()
+Function CreateVoidMesh2()
 
 	LevelExitEntity=CreateMesh()
 	surface=CreateSurface(LevelExitEntity)
@@ -208,7 +208,7 @@ Function CreateVoidMesh()
 	Return LevelExitEntity
 End Function
 
-Function CreateButtonMesh(btype,col1,col2,col3,col4)
+Function CreateButtonMesh2(btype,col1,col2,col3,col4)
 	; texture is the available "colour" from 0-15
 	btype=btype Mod 32
 	;IsGeneralCommand=False
@@ -322,7 +322,7 @@ Function CreateButtonMesh(btype,col1,col2,col3,col4)
 
 ;	If IsGeneralCommand
 ;
-;		ExtraEntity=CreateGeneralCommandTextMesh(col1)
+;		ExtraEntity=CreateGeneralCommandTextMesh2(col1)
 ;
 ;		EntityParent ExtraEntity,Entity
 ;
@@ -332,7 +332,7 @@ Function CreateButtonMesh(btype,col1,col2,col3,col4)
 
 End Function
 
-Function CreateColourGateMesh(subtype,tex)
+Function CreateColourGateMesh2(subtype,tex)
 
 	Entity=CreateMesh()
 	Surface=CreateSurface(Entity)
@@ -399,7 +399,7 @@ Function CreateColourGateMesh(subtype,tex)
 
 End Function
 
-Function CreateRetroLaserGateMesh(col)
+Function CreateRetroLaserGateMesh2(col)
 
 	; create the mesh if laser gate
 	Entity=CreateMesh()
@@ -436,7 +436,7 @@ Function CreateRetroLaserGateMesh(col)
 
 End Function
 
-Function CreateTransporterMesh(tex,subtype)
+Function CreateTransporterMesh2(tex,subtype)
 
 	Entity=CreateMesh()
 	Surface=CreateSurface(Entity)
@@ -496,7 +496,7 @@ Function CreateTransporterMesh(tex,subtype)
 
 End Function
 
-Function CreateCloudMesh(col)
+Function CreateCloudMesh2(col)
 
 	Select col
 	Case 0
@@ -566,7 +566,7 @@ Function CreateCloudMesh(col)
 
 End Function
 
-Function CreateTeleporterMesh(tex)
+Function CreateTeleporterMesh2(tex)
 
 	entity=CreateCylinder(16,False)
 	;ObjectTexture(i)=TeleporterTexture(texture)
@@ -587,7 +587,7 @@ Function CreateTeleporterMesh(tex)
 	Return entity
 End Function
 
-Function CreatePickUpItemMesh(tex)
+Function CreatePickUpItemMesh2(tex)
 	entity=CreateMesh()
 	surface=CreateSurface(entity)
 
@@ -643,7 +643,7 @@ Function CreatePickUpItemMesh(tex)
 	Return Entity
 End Function
 
-Function CreateWaterFallMesh(tex)
+Function CreateWaterFallMesh2(tex)
 
 	Entity=CreateMesh()
 	surface=CreateSurface(Entity)
@@ -682,7 +682,7 @@ Function CreateWaterFallMesh(tex)
 
 End Function
 
-Function CreateKeyMesh(col)
+Function CreateKeyMesh2(col)
 
 	Entity=CopyMesh(KeyMesh)
 
@@ -697,7 +697,7 @@ Function CreateKeyMesh(col)
 	Return Entity
 End Function
 
-Function CreateKeyCardMesh(col)
+Function CreateKeyCardMesh2(col)
 
 	tex=24+col
 
@@ -730,7 +730,7 @@ Function CreateKeyCardMesh(col)
 	Return Entity
 End Function
 
-Function CreateCustomItemMesh(tex)
+Function CreateCustomItemMesh2(tex)
 	entity=CreateMesh()
 
 	surface=CreateSurface(entity)
@@ -791,7 +791,7 @@ Function CreateCustomItemMesh(tex)
 
 End Function
 
-Function CreatePushbotMesh(tex,dir)
+Function CreatePushbotMesh2(tex,dir)
 
 	Entity=CreateMesh()
 	Surface=CreateSurface(Entity)
@@ -880,7 +880,7 @@ Function CreatePushbotMesh(tex,dir)
 
 End Function
 
-Function CreateSuctubeMesh(tex,col,active)
+Function CreateSuctubeMesh2(tex,col,active)
 
 	If active Mod 2 =1
 		active=0
@@ -935,7 +935,7 @@ Function CreateSuctubeMesh(tex,col,active)
 	Return Entity
 End Function
 
-Function CreateSuctubeXMesh(tex)
+Function CreateSuctubeXMesh2(tex)
 
 	Entity=CreateMesh()
 	Surface=CreateSurface(Entity)
@@ -983,4 +983,42 @@ Function CreateSuctubeXMesh(tex)
 
 	EntityTexture Entity,GateTexture
 	Return Entity
+End Function
+
+; col is data0 and direction is data2
+Function RedoSuctubeMesh2(Entity, col, objactive, direction, yawadjust)
+
+	Surface=GetSurface(Entity,1)
+	If objactive Mod 2 = 1
+		active=0
+	Else
+		active=1
+	EndIf
+	If yawadjust=(-90*direction +3600) Mod 360
+		; in original position
+		dir=0
+	Else
+		; switched from original
+		dir=1
+	EndIf
+
+	; point arrow
+	If dir=0
+		VertexCoords surface,0,-0.3,1.71,-0.3
+		VertexCoords surface,1,+0.3,1.71,-0.3
+		VertexCoords surface,2,0,1.71,+0.3
+	Else
+		VertexCoords surface,0,-0.3,1.71,+0.3
+		VertexCoords surface,2,+0.3,1.71,+0.3
+		VertexCoords surface,1,0,1.71,-0.3
+	EndIf
+
+	; and give colour
+
+	VertexTexCoords surface,0,(col Mod 8)*0.125+.01,(col/8)*0.125+.51+.25*active
+	VertexTexCoords surface,1,(col Mod 8)*0.125+.115,(col/8)*0.125+.51+.25*active
+	VertexTexCoords surface,2,(col Mod 8)*0.125+.051,(col/8)*0.125+.51+.115+.25*active
+
+	UpdateNormals Entity
+
 End Function

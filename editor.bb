@@ -25,6 +25,8 @@ Global AlwaysPackContent=False
 Global DisplayFont$="Default"
 
 Dim CompleteCustomHubOverideData$(0) ;required because of shared source with player
+Dim LevelTileExtrusion(100, 100)
+Global EditorStinkerTexture
 
 ; App title and includes
 Global VersionDate$="07/16/23"
@@ -10196,41 +10198,6 @@ Function HoverOverObjectAdjuster(i)
 
 End Function
 
-Function GetMagicName$(id)
-	Select id
-		Case -1
-			Return "No Charge"
-		Case 0
-			Return "Floing"
-		Case 1
-			Return "Pow"
-		Case 2
-			Return "Pop"
-		Case 3
-			Return "Grow"
-		Case 4
-			Return "Brrr"
-		Case 5
-			Return "Flash"
-		Case 6
-			Return "Blink"
-		Case 7
-			Return "Null"
-		Case 8
-			Return "Bounce"
-		Case 9
-			Return "Barrel"
-		Case 10
-			Return "Turret"
-		;Default
-		;	Return id
-	End Select
-End Function
-
-Function GetMagicNameAndId$(id)
-	Return Str(id) + ". " + GetMagicName(id)
-End Function
-
 Function GetMagicColor(id,index)
 
 	Select id
@@ -10881,7 +10848,7 @@ Function BuildObjectModel(Obj.GameObject,x#,y#,z#)
 		If Obj\Attributes\LogicSubType=16+32 And Obj\Attributes\Data2=1 Then Obj\Attributes\LogicSubType=17+32
 		If Obj\Attributes\LogicSubType=17+32 And Obj\Attributes\Data2=0 Then Obj\Attributes\LogicSubType=16+32
 
-		Obj\Model\Entity=CreateButtonMesh(Obj\Attributes\LogicSubType,Obj\Attributes\Data0,Obj\Attributes\Data1,Obj\Attributes\Data2,Obj\Attributes\Data3)
+		Obj\Model\Entity=CreateButtonMesh2(Obj\Attributes\LogicSubType,Obj\Attributes\Data0,Obj\Attributes\Data1,Obj\Attributes\Data2,Obj\Attributes\Data3)
 
 	Else If Obj\Attributes\ModelName$="!CustomModel"
 
@@ -10896,9 +10863,9 @@ Function BuildObjectModel(Obj.GameObject,x#,y#,z#)
 		EntityTexture Obj\Model\Entity,Obj\Model\Texture
 
 	Else If Obj\Attributes\ModelName$="!Teleport"
-		Obj\Model\Entity=CreateTeleporterMesh(Obj\Attributes\Data0)
+		Obj\Model\Entity=CreateTeleporterMesh2(Obj\Attributes\Data0)
 	Else If Obj\Attributes\ModelName$="!Item"
-		Obj\Model\Entity=CreatePickupItemMesh(Obj\Attributes\Data2)
+		Obj\Model\Entity=CreatePickupItemMesh2(Obj\Attributes\Data2)
 	; Q - player NPC functionality
 	Else If Obj\Attributes\ModelName$="!Stinker" Or IsModelNPC(Obj\Attributes\ModelName$)
 		Obj\Model\Entity=CopyEntity(StinkerMesh)
@@ -10933,16 +10900,16 @@ Function BuildObjectModel(Obj.GameObject,x#,y#,z#)
 		EndIf
 
 	Else If Obj\Attributes\ModelName$="!ColourGate"
-		Obj\Model\Entity=CreateColourGateMesh(Obj\Attributes\Data2,Obj\Attributes\Data0)
+		Obj\Model\Entity=CreateColourGateMesh2(Obj\Attributes\Data2,Obj\Attributes\Data0)
 	Else If Obj\Attributes\ModelName$="!Transporter"
-		Obj\Model\Entity=CreateTransporterMesh(Obj\Attributes\Data0,3)
+		Obj\Model\Entity=CreateTransporterMesh2(Obj\Attributes\Data0,3)
 		RotateMesh Obj\Model\Entity,0,90*Obj\Attributes\Data2,0
 
 	Else If Obj\Attributes\ModelName$="!Conveyor"
 		If Obj\Attributes\Data4=4
-			Obj\Model\Entity=CreateCloudMesh(Obj\Attributes\Data0)
+			Obj\Model\Entity=CreateCloudMesh2(Obj\Attributes\Data0)
 		Else
-			Obj\Model\Entity=CreateTransporterMesh(Obj\Attributes\Data0,Obj\Attributes\Data4)
+			Obj\Model\Entity=CreateTransporterMesh2(Obj\Attributes\Data0,Obj\Attributes\Data4)
 		EndIf
 		RotateMesh Obj\Model\Entity,0,-90*Obj\Attributes\Data2,0
 		If Obj\Attributes\LogicType=46 ScaleMesh Obj\Model\Entity,.5,.5,.5
@@ -10951,9 +10918,9 @@ Function BuildObjectModel(Obj.GameObject,x#,y#,z#)
 		Obj\Model\Entity=CopyEntity(AutodoorMesh)
 
 	Else If Obj\Attributes\ModelName$="!Key"
-		Obj\Model\Entity=CreateKeyMesh(Obj\Attributes\Data0)
+		Obj\Model\Entity=CreateKeyMesh2(Obj\Attributes\Data0)
 	Else If Obj\Attributes\ModelName$="!KeyCard"
-		Obj\Model\Entity=CreateKeyCardMesh(Obj\Attributes\Data0)
+		Obj\Model\Entity=CreateKeyCardMesh2(Obj\Attributes\Data0)
 
 	Else If Obj\Attributes\ModelName$="!StinkerWee"
 		Obj\Model\Entity=CopyEntity(StinkerWeeMesh)
@@ -10985,7 +10952,7 @@ Function BuildObjectModel(Obj.GameObject,x#,y#,z#)
 		EntityTexture Obj\Model\Entity,Rainbowtexture2
 
 	Else If Obj\Attributes\ModelName$="!IceBlock"
-		Obj\Model\Entity=CreateIceBlockMesh(Obj\Attributes\Data3)
+		Obj\Model\Entity=CreateIceBlockMesh2(Obj\Attributes\Data3)
 
 	Else If Obj\Attributes\ModelName$="!PlantFloat"
 		Obj\Model\Entity=CreatePlantFloatMesh()
@@ -11103,7 +11070,7 @@ Function BuildObjectModel(Obj.GameObject,x#,y#,z#)
 		ScaleMesh Obj\Model\Entity,0.4,0.4,0.4
 		PositionMesh Obj\Model\Entity,0,0.5,0
 		If Obj\Attributes\Data0<0 Or Obj\Attributes\Data0>8 Then Obj\Attributes\Data0=0
-		EntityTexture Obj\Model\Entity,TeleporterTexture(Obj\Attributes\Data0)
+		EntityTexture Obj\Model\Entity,OldTeleporterTexture(Obj\Attributes\Data0)
 
 	Else If Obj\Attributes\ModelName$="!Prism"
 		Obj\Model\Entity=CopyEntity(PrismMesh)
@@ -11123,7 +11090,7 @@ Function BuildObjectModel(Obj.GameObject,x#,y#,z#)
 		Obj\Model\Entity=TryGetObstacleMesh(ObstacleId)
 
 	Else If Obj\Attributes\ModelName$="!WaterFall"
-		Obj\Model\Entity=CreateWaterFallMesh(Obj\Attributes\Data0)
+		Obj\Model\Entity=CreateWaterFallMesh2(Obj\Attributes\Data0)
 	Else If Obj\Attributes\ModelName$="!Star"
 		Obj\Model\Entity=CopyEntity(StarMesh)
 		EntityTexture Obj\Model\Entity,GoldStarTexture
@@ -11174,7 +11141,7 @@ Function BuildObjectModel(Obj.GameObject,x#,y#,z#)
 		If Data1<0 Or Data1>8
 			UseErrorColor(Obj\Model\Entity)
 		Else
-			EntityTexture Obj\Model\Entity,TeleporterTexture(Data1)
+			EntityTexture Obj\Model\Entity,OldTeleporterTexture(Data1)
 		EndIf
 	Else If Obj\Attributes\ModelName$="!Crystal"
 		Obj\Model\Entity=CopyEntity(GemMesh(2))
@@ -11188,7 +11155,7 @@ Function BuildObjectModel(Obj.GameObject,x#,y#,z#)
 		Obj\Model\Entity=CreateSignMesh(Obj\Attributes\Data0,Obj\Attributes\Data1)
 
 	Else If Obj\Attributes\ModelName$="!CustomItem"
-		Obj\Model\Entity=CreateCustomItemMesh(Obj\Attributes\Data0)
+		Obj\Model\Entity=CreateCustomItemMesh2(Obj\Attributes\Data0)
 
 	Else If Obj\Attributes\ModelName$="!SteppingStone"
 		Obj\Model\Entity=MyLoadMesh("data\models\bridges\cylinder1.b3d",0)
@@ -11204,18 +11171,18 @@ Function BuildObjectModel(Obj.GameObject,x#,y#,z#)
 
 		EntityTexture Obj\Model\Entity,Springtexture
 	Else If Obj\Attributes\ModelName$="!Suctube"
-		Obj\Model\Entity=CreateSuctubemesh(Obj\Attributes\Data3,Obj\Attributes\Data0,True)
+		Obj\Model\Entity=CreateSuctubeMesh2(Obj\Attributes\Data3,Obj\Attributes\Data0,True)
 
 		Obj\Attributes\YawAdjust=(-90*Obj\Attributes\Data2 +3600) Mod 360
 
-		Redosuctubemesh(Obj\Model\Entity, Obj\Attributes\Data0, Obj\Attributes\Active, Obj\Attributes\Data2, Obj\Attributes\YawAdjust)
+		RedosuctubeMesh2(Obj\Model\Entity, Obj\Attributes\Data0, Obj\Attributes\Active, Obj\Attributes\Data2, Obj\Attributes\YawAdjust)
 
 	Else If Obj\Attributes\ModelName$="!SuctubeX"
-		Obj\Model\Entity=CreateSuctubeXmesh(Obj\Attributes\Data3)
+		Obj\Model\Entity=CreateSuctubeXMesh2(Obj\Attributes\Data3)
 		Obj\Attributes\YawAdjust=(-90*Obj\Attributes\Data2 +3600) Mod 360
 
 	Else If Obj\Attributes\ModelName$="!FlipBridge"
-		Obj\Model\Entity=CreateFlipBridgeMesh(Obj\Attributes\Data0)
+		Obj\Model\Entity=CreateFlipBridgeMesh2(Obj\Attributes\Data0)
 		Obj\Attributes\YawAdjust=(-45*Obj\Attributes\Data2 +3600) Mod 360
 
 	Else If Obj\Attributes\ModelName$="!Door"
@@ -11228,7 +11195,7 @@ Function BuildObjectModel(Obj.GameObject,x#,y#,z#)
 		Obj\Model\Entity=MyLoadmesh("Data\models\squares\square1.b3d",0)
 
 	Else If Obj\Attributes\ModelName$="!SpellBall"
-		Obj\Model\Entity=CreateSpellBallMesh(7) ; use white magic spellball mesh
+		Obj\Model\Entity=CreateSpellBallMesh2(7) ; use white magic spellball mesh
 
 	Else If Obj\Attributes\ModelName$="!Fence1"
 		Obj\Model\Entity=CopyEntity(fence1)
@@ -11259,7 +11226,7 @@ Function BuildObjectModel(Obj.GameObject,x#,y#,z#)
 		Obj\Attributes\YawAdjust=(-90*Obj\Attributes\Data0 +3600) Mod 360
 
 	Else If Obj\Attributes\ModelName$="!Retrolasergate"
-		Obj\Model\Entity=CreateretrolasergateMesh(Obj\Attributes\Data0)
+		Obj\Model\Entity=CreateretrolasergateMesh2(Obj\Attributes\Data0)
 
 	Else If Obj\Attributes\ModelName$="!Weebot"
 		Obj\Model\Entity=CopyEntity(WeebotMesh)
@@ -11270,25 +11237,6 @@ Function BuildObjectModel(Obj.GameObject,x#,y#,z#)
 		Obj\Attributes\YawAdjust=(-90*Obj\Attributes\Data0 +3600) Mod 360
 
 	Else If Obj\Attributes\ModelName$="!Pushbot"
-		Obj\Model\Entity=CreatePushbotMesh(Obj\Attributes\Data0,Obj\Attributes\Data3)
-
-		If Obj\Attributes\LogicType=432 ; Moobot
-			Obj\Attributes\YawAdjust=-Obj\Attributes\Data2*90
-		Else
-			Obj\Attributes\YawAdjust=0 ; Unfortunately hardcoded in adventures.bb.
-		EndIf
-
-	Else If Obj\Attributes\ModelName$="!ZbotNPC"
-		Obj\Model\Entity=CopyEntity(ZbotNPCMesh)
-		If Obj\Attributes\Data2<0 Or Obj\Attributes\Data2>7
-			UseErrorColor(Obj\Model\Entity)
-		Else
-			EntityTexture Obj\Model\Entity,ZBotNPCTexture(Obj\Attributes\Data2)
-		EndIf
-
-	Else If Obj\Attributes\ModelName$="!Mothership"
-		Obj\Model\Entity=CopyEntity(MothershipMesh)
-
 	Else If Obj\Attributes\ModelName="!FloingOrb" ; not toObj\Attributes\YawAdjustingBubble
 		Obj\Model\Entity=CreateSphere()
 		ScaleMesh Obj\Model\Entity,.3,.3,.3
@@ -11356,11 +11304,11 @@ Function BuildObjectModel(Obj.GameObject,x#,y#,z#)
 
 	Else If Left$(Obj\Attributes\TexName$,2)="!T"
 
-		EntityTexture TextureTarget,StinkerTexture
+		EntityTexture TextureTarget,EditorStinkerTexture
 
 		For i=1 To CountChildren(TextureTarget)
 			child=GetChild(TextureTarget,i)
-			EntityTexture child,StinkerTexture
+			EntityTexture child,EditorStinkerTexture
 		Next
 	Else If Obj\Attributes\TexName$="!GloveTex"
 		EntityTexture TextureTarget,GloveTex
@@ -16760,8 +16708,8 @@ Function ControlObjects()
 
 	; Scroll Teleporters
 	For i=0 To 9
-		If TeleporterTexture(i)>0
-			PositionTexture TeleporterTexture(i),0,-Float((LevelTimer/3) Mod 100)/100.0
+		If OldTeleporterTexture(i)>0
+			PositionTexture OldTeleporterTexture(i),0,-Float((LevelTimer/3) Mod 100)/100.0
 		EndIf
 	Next
 

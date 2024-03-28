@@ -35,7 +35,7 @@ AppTitle "Wonderland Adventures MNIKEditor (Version "+VersionDate$+")"
 
 ; GLOBAL DEFINATIONS
 Include "shared/defines.bb"
-;Include "editor/editor-cutscene-define.bb"
+Include "editor/editor-cutscene-define.bb"
 Include "shared/particles-define.bb"
 Include "sound-define.bb"
 
@@ -16199,5 +16199,5 @@ Include "editor/editor-getnames.bb"
 Include "editor/editor-meshcontrol.bb"
 Include "editor/editor-objectmodels.bb"
 Include "editor/editor-typeconvert.bb"
-;Include "editor/editor-cutscenes.bb"
-;Include "shared/clipboard.bb"
+Include "editor/editor-cutscenes.bb"
+Include "shared/clipboard.bb"

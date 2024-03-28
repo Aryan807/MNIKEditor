@@ -2,7 +2,9 @@ Function BuildObjectModel(Obj.GameObject,x#,y#,z#)
 
 	FreeObjectModel(Obj\Model)
 
-	If Obj\Attributes\ModelName$="!Button"
+	If True
+        BuildWOIObjectModel(Obj)
+    Else If Obj\Attributes\ModelName$="!Button"
 		If Obj\Attributes\LogicSubType=16 And Obj\Attributes\Data2=1 Then Obj\Attributes\LogicSubType=17
 		If Obj\Attributes\LogicSubType=17 And Obj\Attributes\Data2=0 Then Obj\Attributes\LogicSubType=16
 		If Obj\Attributes\LogicSubType=16+32 And Obj\Attributes\Data2=1 Then Obj\Attributes\LogicSubType=17+32
@@ -116,16 +118,8 @@ Function BuildObjectModel(Obj.GameObject,x#,y#,z#)
 
 	Else If Obj\Attributes\ModelName$="!PlantFloat"
 		Obj\Model\Entity=CreatePlantFloatMesh()
-		;Obj\Model\Entity=CreateSphere()
-		;ScaleMesh Obj\Model\Entity,.4,.1,.4
-;		PositionMesh Obj\Model\Entity,0,1,0
-		;EntityTexture Obj\Model\Entity,Rainbowtexture
-
 	Else If Obj\Attributes\ModelName$="!IceFloat"
 		Obj\Model\Entity=CreateIceFloatMesh()
-		;Obj\Model\Entity=CreateSphere()
-		;ScaleMesh Obj\Model\Entity,.4,.1,.4
-;		PositionMesh Obj\Model\Entity,0,1,0
 
 	Else If Obj\Attributes\ModelName$="!Chomper"
 		Obj\Model\Entity=CopyEntity(ChomperMesh)

@@ -2,6 +2,22 @@
 ; CONVERT MNIKGAMEOBJECT TO WOI
 ; WORST CONVERSION EVER!!!
 
+Function BuildWOIObjectModel(MNIK.GameObject)
+	openwaObject.woi = new woi
+	If MyCurrentObject <> Null
+		Delete MyCurrentObject
+	EndIf
+	MyCurrentObject = new woi
+	FillWOIObject(openwaObject, MNIK)
+	FillWOIObject(MyCurrentObject, CurrentObject)
+	CreateObjectModel(openwaObject, False, True, False)
+	; refill all!
+	FillMNIKObject(MNIK, openwaObject)
+	;FillMNIKObject(CurrentObject, MyCurrentObject)
+	Delete openwaObject
+	Delete MyCurrentObject
+End Function
+
 Function FillWOIObject(openwa.woi, MNIK.GameObject)
 	openwa\Entity=MNIK\Model\Entity
 	openwa\Texture=MNIK\Model\Texture
@@ -127,13 +143,13 @@ Function FillWOIObject(openwa.woi, MNIK.GameObject)
 End Function
 
 Function FillMNIKObject(MNIK.GameObject, openwa.woi)
-	MNIK\Model\Entity=MNIK\Model\Entity
-	MNIK\Model\Texture=MNIK\Model\Texture
+	MNIK\Model\Entity=openwa\Entity
+	MNIK\Model\Texture=openwa\Texture
 
-    MNIK\Model\HatEntity=MNIK\Model\HatEntity
-    MNIK\Model\HatTexture=MNIK\Model\HatTexture
-    MNIK\Model\AccEntity=MNIK\Model\AccEntity
-    MNIK\Model\HatTexture=MNIK\Model\HatTexture
+    MNIK\Model\HatEntity=openwa\HatEntity
+    MNIK\Model\HatTexture=openwa\HatTexture
+    MNIK\Model\AccEntity=openwa\AccEntity
+    MNIK\Model\HatTexture=openwa\HatTexture
 
 	MNIK\Position\X=openwa\X
 	MNIK\Position\Y=openwa\Y

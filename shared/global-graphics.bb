@@ -192,11 +192,13 @@ Function PopulateGlobalGraphics(mode) ; 0 = editor, 1 = player
 		HouseTexture(i)=MyLoadTexture("data\models\houses\townhouse"+Str$(i)+".png",1)
 	Next
 	For i=0 To 0
-		WindmillTexture(i)=MyLoadTexture("data\models\houses\windmill"+Str$(i)+".png",1)
+		OldWindmillTexture(i)=MyLoadTexture("data\models\houses\windmill"+Str$(i)+".png",1)
 	Next
 	For i=0 To 0
-		FenceTexture(i)=MyLoadTexture("data\models\houses\fence"+Str$(i)+".png",1)
+		OldFenceTexture(i)=MyLoadTexture("data\models\houses\fence"+Str$(i)+".png",1)
 	Next
+	WindmillTexture=MyLoadTexture("Data/Models/houses/windmill0.png",1)
+	FenceTexture=MyLoadTexture("Data/Models/houses/fence0.png",1)
 
 	; Fountain
 	Fountain=MyLoadMesh("Data/Models/houses/Fountain01.b3d",0)

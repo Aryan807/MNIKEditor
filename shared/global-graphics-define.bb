@@ -91,8 +91,8 @@ Global KeyMesh
 Dim SignMesh(5),SignTexture(5)
 
 ; Houses
-Dim DoorTexture(10),CottageTexture(10),HouseTexture(10),WindmillTexture(10),FenceTexture(10)
-Global NewWindmillTexture,NewFenceTexture ; there's only one of each
+Dim DoorTexture(10),CottageTexture(10),HouseTexture(10),OldWindmillTexture(10),OldFenceTexture(10)
+Global WindmillTexture,FenceTexture ; there's only one of each
 ; Fountain
 Global Fountain,FountainTexture
 

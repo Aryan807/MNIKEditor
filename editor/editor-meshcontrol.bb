@@ -569,7 +569,7 @@ End Function
 Function CreateTeleporterMesh2(tex)
 
 	entity=CreateCylinder(16,False)
-	;ObjectTexture(i)=TeleporterTexture(texture)
+	;ObjectTexture(i)=OldTeleporterTexture(texture)
 
 	PositionMesh entity,0,1,0
 	ScaleMesh entity,.4,2,.4
@@ -577,7 +577,7 @@ Function CreateTeleporterMesh2(tex)
 	If tex<0 Or tex>8
 		tex=0
 	EndIf
-	EntityTexture entity,TeleporterTexture(tex)
+	EntityTexture entity,OldTeleporterTexture(tex)
 	EntityBlend entity,3
 	EntityFX entity,2
 	For j=0 To 16

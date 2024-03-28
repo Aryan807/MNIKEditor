@@ -69,17 +69,17 @@ Function PopulateGlobalGraphics(mode) ; 0 = editor, 1 = player
 	; ==================
 	; Stinker
 	StinkerMesh=MyLoadAnimMesh("Data/Models/stinker/body.b3d")
-	;For tex=0 To 7
-	;	If tex<>4 And tex<>5
-	;		For expr=0 To 4
-	;			StinkerTexture(tex,expr)=MyLoadTexture("Data/Models/stinker/body00"+Str$(tex+1)+Chr$(65+expr)+".jpg",1)
-	;		Next
-	;		StinkerTexture(tex,5)=MyLoadTexture("Data/NewModels/stinker/body00"+Str$(tex+1)+Chr$(70)+".jpg",1)
-	;	EndIf
-	;Next
-	;For expr=0 To 5
-	;	StinkerTexture(8,expr)=MyLoadTexture("Data/NewModels/stinker/body00"+Str$(8+1)+Chr$(65+expr)+".jpg",1)
-	;Next
+	For tex=0 To 7
+		If tex<>4 And tex<>5
+			For expr=0 To 4
+				StinkerTexture(tex,expr)=MyLoadTexture("Data/Models/stinker/body00"+Str$(tex+1)+Chr$(65+expr)+".jpg",1)
+			Next
+			StinkerTexture(tex,5)=MyLoadTexture("Data/NewModels/stinker/body00"+Str$(tex+1)+Chr$(70)+".jpg",1)
+		EndIf
+	Next
+	For expr=0 To 5
+		StinkerTexture(8,expr)=MyLoadTexture("Data/NewModels/stinker/body00"+Str$(8+1)+Chr$(65+expr)+".jpg",1)
+	Next
 	EditorStinkerTexture=MyLoadTexture("data\models\stinker\body001a.jpg",1)
 	StinkerSmokedTexture=MyLoadTexture("Data/Models/stinker/bodysmoked.jpg",1)
 	If mode=0

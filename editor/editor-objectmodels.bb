@@ -1,8 +1,8 @@
 Function BuildObjectModel(Obj.GameObject,x#,y#,z#)
 
-	FreeObjectModel(Obj\Model)
+	If Not UseWOI Then FreeObjectModel(Obj\Model)
 
-	If True
+	If UseWOI
         BuildWOIObjectModel(Obj)
     Else If Obj\Attributes\ModelName$="!Button"
 		If Obj\Attributes\LogicSubType=16 And Obj\Attributes\Data2=1 Then Obj\Attributes\LogicSubType=17

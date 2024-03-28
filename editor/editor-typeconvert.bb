@@ -4,16 +4,22 @@
 
 Function BuildWOIObjectModel(MNIK.GameObject)
 	openwaObject.woi = new woi
-	If MyCurrentObject <> Null
-		Delete MyCurrentObject
-	EndIf
-	MyCurrentObject = new woi
 	FillWOIObject(openwaObject, MNIK)
-	FillWOIObject(MyCurrentObject, CurrentObject)
+	If (MNIK = CurrentObject)
+		MyCurrentObject = openwaObject
+	Else
+		If MyCurrentObject <> Null
+			Delete MyCurrentObject
+		EndIf
+		MyCurrentObject = new woi
+		FillWOIObject(MyCurrentObject, CurrentObject)
+	EndIf
 	CreateObjectModel(openwaObject, False, True, False)
 	; refill all!
 	FillMNIKObject(MNIK, openwaObject)
-	;FillMNIKObject(CurrentObject, MyCurrentObject)
+	If MNIK <> CurrentObject
+		FillMNIKObject(CurrentObject, MyCurrentObject)
+	EndIf
 	Delete openwaObject
 	Delete MyCurrentObject
 End Function

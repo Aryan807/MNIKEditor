@@ -846,6 +846,7 @@ Function CreateObjectModel(this.woi,complete=False,showHidden=False,inPlayer=Tru
 	If this\ScaleAdjust=0.0
 		this\ScaleAdjust=1.0
 	EndIf
+	Return 0
 	If this\ModelName$<>"!None"
 		ScaleEntity this\Entity,this\XScale*this\ScaleAdjust,this\ZScale*this\ScaleAdjust,this\YScale*this\ScaleAdjust
 		RotateEntity this\Entity,0,0,0

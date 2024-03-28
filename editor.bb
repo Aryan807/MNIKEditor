@@ -16,6 +16,7 @@ Global WAEpisode=0	; 0-editor
 
 ; Versions
 Const OpenSource=False
+Const UseWOI=True
 
 ; Options
 Global UseNewUI=True

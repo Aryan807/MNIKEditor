@@ -5,3 +5,5 @@
 Data/
 UserData/
 .vscode/
+*.dll
+*.conf

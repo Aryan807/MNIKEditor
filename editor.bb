@@ -30,7 +30,7 @@ Dim LevelTileExtrusion(100, 100)
 Global EditorStinkerTexture
 
 ; App title and includes
-Global VersionDate$="07/16/23"
+Global VersionDate$="03/29/24"
 AppTitle "Wonderland Adventures MNIKEditor (Version "+VersionDate$+")"
 
 ; GLOBAL DEFINATIONS
@@ -859,6 +859,10 @@ Function EditorMainLoop()
 	Else
 		Line1$="LEVEL: "+CurrentLevelNumber
 	EndIf
+	
+	
+	
+	
 	RightAlignedText(LevelViewportWidth,5,Line1$)
 
 	If EditorMode=0 Or EditorMode=3

@@ -1,0 +1,2 @@
+; yes!
+Include "editor.bb"
